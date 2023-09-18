@@ -1,5 +1,5 @@
 import './Login.scss'
-import { Link, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 const Login = (props) => {
     let history = useHistory();

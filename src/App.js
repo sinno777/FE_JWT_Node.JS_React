@@ -7,6 +7,8 @@ import {
   Route
 } from "react-router-dom";
 import Register from './components/Register/Register';
+import { ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
@@ -24,10 +26,10 @@ function App() {
             contact
           </Route>
           <Route path="/login">
-            <Login/>
+            <Login />
           </Route>
           <Route path="/register">
-          <Register/>
+            <Register />
           </Route>
           <Route path="/" exact>
             home
@@ -37,6 +39,19 @@ function App() {
           </Route>
         </Switch>
       </div>
+
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </Router>
   );
 }
