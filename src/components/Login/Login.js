@@ -14,7 +14,7 @@ const Login = (props) => {
     }
     const [objValidInput, setObjValidInput] = useState(defaultObjValid);
     const handleCreateNewAcc = () => {
-        history.push("/register");
+        history.push("/register")
     }
 
     const handleLogin = async () => {
@@ -31,7 +31,23 @@ const Login = (props) => {
         }
 
 
-        await loginUser(valueLogin, password)
+        let response = await loginUser(valueLogin, password)
+
+        if (response && response.data && +response.data.EC === 0) {
+            //success
+            let data = {
+                isAuthenticated: true,
+                token: 'fake token'
+            }
+            sessionStorage.setItem("account", JSON.stringify(data));
+            toast.success(response.data.EM)
+            history.push("/users")
+        }
+
+        if (response && response.data && +response.data.EC !== 0) {
+            //fail
+            toast.error(response.data.EM)
+        }
     }
     return (
         <div className="login-container py-5">
