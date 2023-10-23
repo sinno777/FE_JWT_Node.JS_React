@@ -52,7 +52,6 @@ const Login = (props) => {
     }
 
     const handleEnter = (e) => {
-        console.log(e)
         if (e.code === "Enter" && e.keyCode === 13) {
             e.preventDefault();
             handleLogin();

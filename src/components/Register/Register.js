@@ -80,6 +80,13 @@ const Register = (props) => {
         }
     }
 
+    const handleEnter = (e) => {
+        if (e.code === "Enter" && e.keyCode === 13) {
+            e.preventDefault();
+            handleRegister();
+        }
+    }
+
     return (
         <div className="register-container py-3">
             <div className="container">
@@ -121,7 +128,9 @@ const Register = (props) => {
                         <form className='form-group'>
                             <label className='form-label' htmlFor='re_password'>Confirm your password</label>
                             <input type="password" className={objCheckInput.isValidConfirmPassword ? 'form-control' : 'form-control is-invalid'} placeholder='Confirm your password' id='re_password'
-                                value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}
+                                value={confirmPassword}
+                                onChange={(e) => setConfirmPassword(e.target.value)}
+                                onKeyDown={(e) => handleEnter(e)}
                             />
                         </form>
                         <button className='btn btn-primary' onClick={() => handleRegister()} >Register</button>
