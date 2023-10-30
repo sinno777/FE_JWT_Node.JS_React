@@ -5,7 +5,7 @@ import Modal from 'react-bootstrap/Modal';
 export default function ModalDeleteConfirm({ isshowModal, handleClose, handleConfirm, dataModal }) {
     return (
         <>
-            <Modal show={isshowModal} onHide={handleClose}>
+            <Modal show={isshowModal} onHide={handleClose} centered>
                 <Modal.Header closeButton>
                     <Modal.Title>Confirm delete</Modal.Title>
                 </Modal.Header>

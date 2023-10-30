@@ -4,6 +4,7 @@ import { deleteUser, fetchAllUser } from '../../services/userService';
 import ReactPaginate from 'react-paginate';
 import { toast } from 'react-toastify';
 import ModalDeleteConfirm from './ModalDeleteComfirm';
+import ModalUser from './ModalUser';
 
 
 export default function Users() {
@@ -134,6 +135,9 @@ export default function Users() {
                 handleConfirm={handleConfirm}
                 dataModal={dataModal}
             />
+
+            <ModalUser />
+
         </>
     )
 }
