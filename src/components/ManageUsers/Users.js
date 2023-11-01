@@ -13,6 +13,7 @@ export default function Users() {
     const [currentLimit, setCurrentLimit] = useState(3);
     const [totalPages, setTotalPages] = useState(0);
     const [isshowModal, setIsshowModal] = useState(false);
+    const [isshowModalUser, setIsshowModalUser] = useState(false);
     const [dataModal, setDataModal] = useState({});
     useEffect(() => {
         fetchUser()
@@ -48,6 +49,9 @@ export default function Users() {
             toast.error(response.data.EM)
         }
     }
+    const onHideModalUser = () => {
+        setIsshowModalUser(false)
+    }
     return (
         <>
             <div className='container'>
@@ -58,7 +62,7 @@ export default function Users() {
                         </div>
                         <div className="user_action">
                             <button className='btn btn-success'>Refresh</button>
-                            <button className='btn btn-primary'>Add new user</button>
+                            <button className='btn btn-primary' onClick={() => setIsshowModalUser(true)}>Add new user</button>
                         </div>
                     </div>
                     <div className="user_body">
@@ -136,7 +140,10 @@ export default function Users() {
                 dataModal={dataModal}
             />
 
-            <ModalUser />
+            <ModalUser
+                onHide={onHideModalUser}
+                isshowModalUser={isshowModalUser}
+            />
 
         </>
     )
