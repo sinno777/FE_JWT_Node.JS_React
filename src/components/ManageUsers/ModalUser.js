@@ -89,8 +89,15 @@ export default function ModalUser({ title, onHide, isshowModalUser }) {
             if (res.data && res.data.EC === 0) {
                 onHide()
                 setUserData({ ...defaultUserData, group: groups[0].id })
+                toast.success("Success create new user")
             } else {
-                toast.error(`Error with create...`)
+                if (res.data && res.data.EM === 'Email invalid') {
+                    toast.error(res.data.EM)
+                    let _validInput = _.cloneDeep(userData)
+                    _validInput['email'] = false
+                    setValidInput(_validInput)
+                    emailRef.current.focus()
+                }
             }
         }
 
