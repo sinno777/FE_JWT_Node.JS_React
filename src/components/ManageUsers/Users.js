@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import './Users.scss'
 import { deleteUser, fetchAllUser } from '../../services/userService';
 import ReactPaginate from 'react-paginate';
@@ -12,9 +12,13 @@ export default function Users() {
     const [currentPage, setCurrentPage] = useState(1);
     const [currentLimit, setCurrentLimit] = useState(3);
     const [totalPages, setTotalPages] = useState(0);
+    //modal delete
     const [isshowModal, setIsshowModal] = useState(false);
-    const [isshowModalUser, setIsshowModalUser] = useState(false);
     const [dataModal, setDataModal] = useState({});
+    //modal edit
+    const [isshowModalUser, setIsshowModalUser] = useState(false);
+    const [actionModalUser, setActionModalUser] = useState("CREATE");
+    const [dataModalUser, setDataModalUser] = useState({});
     useEffect(() => {
         fetchUser()
     }, [currentPage]);
@@ -49,9 +53,19 @@ export default function Users() {
             toast.error(response.data.EM)
         }
     }
-    const onHideModalUser = () => {
+    const onHideModalUser = async () => {
         setIsshowModalUser(false)
+        setDataModalUser({})
+        await fetchUser()
     }
+    const handleEdit = (user) => {
+        setActionModalUser("EDIT")
+        setDataModalUser(user)
+        setIsshowModalUser(true)
+    }
+
+
+
     return (
         <>
             <div className='container'>
@@ -62,7 +76,12 @@ export default function Users() {
                         </div>
                         <div className="user_action">
                             <button className='btn btn-success'>Refresh</button>
-                            <button className='btn btn-primary' onClick={() => setIsshowModalUser(true)}>Add new user</button>
+                            <button className='btn btn-primary'
+                                onClick={() => {
+                                    setIsshowModalUser(true);
+                                    setActionModalUser("CREATE")
+                                }}
+                            >Add new user</button>
                         </div>
                     </div>
                     <div className="user_body">
@@ -83,14 +102,15 @@ export default function Users() {
                                         {listUser.map((user, index) => {
                                             return (
                                                 <tr key={`row-${index}`}>
-                                                    <th>{index + 1}</th>
+                                                    <th>{currentLimit * (currentPage - 1) + index + 1}</th>
                                                     <td>{user.id}</td>
                                                     <td>{user.email}</td>
                                                     <td>{user.phone}</td>
                                                     <td>{user.username}</td>
                                                     <td>{user.Group ? user.Group.name : ''}</td>
                                                     <td>
-                                                        <button className='btn btn-warning mx-2'>Edit</button>
+                                                        <button className='btn btn-warning mx-2' onClick={() => handleEdit(user)}
+                                                        >Edit</button>
                                                         <button className='btn btn-danger'
                                                             onClick={() => handleDelete(user)}
                                                         >Delete</button>
@@ -143,6 +163,9 @@ export default function Users() {
             <ModalUser
                 onHide={onHideModalUser}
                 isshowModalUser={isshowModalUser}
+                action={actionModalUser}
+                dataModalUser={dataModalUser}
+
             />
 
         </>
