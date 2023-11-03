@@ -33,21 +33,21 @@ const Login = (props) => {
 
         let response = await loginUser(valueLogin, password)
 
-        if (response && response.data && +response.data.EC === 0) {
+        if (response && +response.EC === 0) {
             //success
             let data = {
                 isAuthenticated: true,
                 token: 'fake token'
             }
             sessionStorage.setItem("account", JSON.stringify(data));
-            toast.success(response.data.EM)
+            toast.success(response.EM)
             history.push("/users")
             window.location.reload()
         }
 
-        if (response && response.data && +response.data.EC !== 0) {
+        if (response && +response.EC !== 0) {
             //fail
-            toast.error(response.data.EM)
+            toast.error(response.EM)
         }
     }
 

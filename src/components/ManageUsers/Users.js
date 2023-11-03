@@ -25,9 +25,9 @@ export default function Users() {
 
     const fetchUser = async () => {
         let response = await fetchAllUser(currentPage, currentLimit)
-        if (response && response.data && +response.data.EC === 0) {
-            setTotalPages(response.data.DT.totalPerPages)
-            setListUser(response.data.DT.users)
+        if (response && +response.EC === 0) {
+            setTotalPages(response.DT.totalPerPages)
+            setListUser(response.DT.users)
         }
     }
     const handlePageClick = (event) => {
@@ -45,12 +45,12 @@ export default function Users() {
     }
     const handleConfirm = async () => {
         let response = await deleteUser(dataModal)
-        if (response && response.data.EC === 0) {
-            toast.success(response.data.EM)
+        if (response && response.EC === 0) {
+            toast.success(response.EM)
             await fetchUser()
             setIsshowModal(false)
         } else {
-            toast.error(response.data.EM)
+            toast.error(response.EM)
         }
     }
     const onHideModalUser = async () => {
@@ -78,7 +78,7 @@ export default function Users() {
                             <button className='btn btn-success mx-2'
                                 onClick={() => fetchUser()}
                             >
-                                <i class="fa fa-refresh px-2 fs-5" aria-hidden="true"></i>
+                                <i className="fa fa-refresh px-2 fs-5" aria-hidden="true"></i>
                                 <span>Refresh</span></button>
                             <button className='btn btn-primary'
                                 onClick={() => {
@@ -86,7 +86,7 @@ export default function Users() {
                                     setActionModalUser("CREATE")
                                 }}
                             >
-                                <i class="fa fa-plus-circle px-2 fs-5" aria-hidden="true"></i>
+                                <i className="fa fa-plus-circle px-2 fs-5" aria-hidden="true"></i>
                                 <span>Add new User</span></button>
                         </div>
                     </div>

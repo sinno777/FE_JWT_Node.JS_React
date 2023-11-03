@@ -39,7 +39,7 @@ export default function ModalUser({ action, onHide, isshowModalUser, dataModalUs
         if (action === 'EDIT') {
             setUserData({ ...dataModalUser, group: dataModalUser.Group ? dataModalUser.Group.id : '' })
         }
-    }, [dataModalUser, action]);
+    }, [action, dataModalUser]);
     useEffect(() => {
         if (action === 'CREATE') {
             if (groups && groups.length > 0)
@@ -48,14 +48,14 @@ export default function ModalUser({ action, onHide, isshowModalUser, dataModalUs
     }, [action]);
     let getGroups = async () => {
         let res = await fetchGroups()
-        if (res && res.data && +res.data.EC === 0) {
-            setGroups(res.data.DT)
-            if (res.data.DT && res.data.DT.length > 0) {
-                let groups = res.data.DT
+        if (res && +res.EC === 0) {
+            setGroups(res.DT)
+            if (res.DT && res.DT.length > 0) {
+                let groups = res.DT
                 setUserData({ ...userData, group: groups[0].id })
             }
         } else {
-            toast.error(res.data.EM)
+            toast.error(res.EM)
         }
     }
 
@@ -101,7 +101,7 @@ export default function ModalUser({ action, onHide, isshowModalUser, dataModalUs
                 await createNewUser({ ...userData, groupId: userData['group'] })
                 : await updateCurrentUser({ ...userData, groupId: userData['group'] })
 
-            if (res.data && res.data.EC === 0) {
+            if (res && res.EC === 0) {
                 onHide()
                 setUserData({
                     ...defaultUserData,
@@ -109,13 +109,13 @@ export default function ModalUser({ action, onHide, isshowModalUser, dataModalUs
                 })
                 toast.success("Success create new user")
             }
-            if (res.data && +res.data.EC !== 0) {
-                toast.error(res.data.EM)
+            if (res && +res.EC !== 0) {
+                toast.error(res.EM)
                 let _validInput = _.cloneDeep(defaultValidInputs)
-                _validInput[res.data.DT] = false
+                _validInput[res.DT] = false
                 setValidInput(_validInput)
-                if (res.data.DT === 'email') emailRef.current.focus()
-                if (res.data.DT === 'phone') phoneRef.current.focus()
+                if (res.DT === 'email') emailRef.current.focus()
+                if (res.DT === 'phone') phoneRef.current.focus()
             }
         }
 
@@ -174,7 +174,7 @@ export default function ModalUser({ action, onHide, isshowModalUser, dataModalUs
                             <label>Group: (<span className='red'>*</span>)</label>
                             <select className={validInput.group ? 'form-select' : 'form-select is-invalid'}
                                 onChange={(e) => handleOnchangeInput(e.target.value, 'group')}
-                                value={userData.group}
+                                value={userData.group = !userData.group ? 3 : userData.group}
                             >
                                 {groups.length > 0 &&
                                     groups.map((group, index) => {
