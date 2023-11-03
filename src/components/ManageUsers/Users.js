@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Users.scss'
 import { deleteUser, fetchAllUser } from '../../services/userService';
 import ReactPaginate from 'react-paginate';
@@ -10,7 +10,7 @@ import ModalUser from './ModalUser';
 export default function Users() {
     const [listUser, setListUser] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [currentLimit, setCurrentLimit] = useState(3);
+    const [currentLimit, setCurrentLimit] = useState(5);
     const [totalPages, setTotalPages] = useState(0);
     //modal delete
     const [isshowModal, setIsshowModal] = useState(false);
@@ -70,30 +70,37 @@ export default function Users() {
         <>
             <div className='container'>
                 <div className='manageUser_container'>
-                    <div className="user_header">
+                    <div className="user_header my-2">
                         <div className="user_title">
-                            <h1>Table Users: </h1>
+                            <h1>Manage Users: </h1>
                         </div>
                         <div className="user_action">
-                            <button className='btn btn-success'>Refresh</button>
+                            <button className='btn btn-success mx-2'
+                                onClick={() => fetchUser()}
+                            >
+                                <i class="fa fa-refresh px-2 fs-5" aria-hidden="true"></i>
+                                <span>Refresh</span></button>
                             <button className='btn btn-primary'
                                 onClick={() => {
                                     setIsshowModalUser(true);
                                     setActionModalUser("CREATE")
                                 }}
-                            >Add new user</button>
+                            >
+                                <i class="fa fa-plus-circle px-2 fs-5" aria-hidden="true"></i>
+                                <span>Add new User</span></button>
                         </div>
                     </div>
-                    <div className="user_body">
+                    <div className="user_body my-3">
                         <table className="table table-bordered table-striped table-hover">
                             <thead>
-                                <tr>
-                                    <th scope="col">No</th>
+                                <tr className='text-center fs-5'>
+                                    <th scope="col" className='w-auto'>No</th>
                                     <th scope="col">Id</th>
                                     <th scope="col">Email</th>
                                     <th scope="col">Phone</th>
                                     <th scope="col">Username</th>
                                     <th scope="col">Group</th>
+                                    <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -101,19 +108,28 @@ export default function Users() {
                                     <>
                                         {listUser.map((user, index) => {
                                             return (
-                                                <tr key={`row-${index}`}>
-                                                    <th>{currentLimit * (currentPage - 1) + index + 1}</th>
+                                                <tr key={`row-${index}`} className='user-tableRow'>
+                                                    <th className='text-center'>{currentLimit * (currentPage - 1) + index + 1}</th>
                                                     <td>{user.id}</td>
-                                                    <td>{user.email}</td>
-                                                    <td>{user.phone}</td>
+                                                    <td className='text-start'>{user.email}</td>
+                                                    <td className='text-start'>{user.phone}</td>
                                                     <td>{user.username}</td>
                                                     <td>{user.Group ? user.Group.name : ''}</td>
                                                     <td>
-                                                        <button className='btn btn-warning mx-2' onClick={() => handleEdit(user)}
-                                                        >Edit</button>
-                                                        <button className='btn btn-danger'
+                                                        <button
+                                                            title='Update'
+                                                            className='btn btn-warning mx-2 user-update'
+                                                            onClick={() => handleEdit(user)}
+                                                        >
+                                                            <i className="fa fa-pencil-square-o fs-5" aria-hidden="true"></i>
+                                                        </button>
+                                                        <button
+                                                            title='Delete'
+                                                            className='btn btn-danger user-delete'
                                                             onClick={() => handleDelete(user)}
-                                                        >Delete</button>
+                                                        >
+                                                            <i className="fa fa-trash-o fs-5 text-white" aria-hidden="true"></i>
+                                                        </button>
                                                     </td>
                                                 </tr>
                                             )

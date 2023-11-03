@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { createNewUser, fetchGroups } from '../../services/userService';
+import { createNewUser, fetchGroups, updateCurrentUser } from '../../services/userService';
 import { toast } from 'react-toastify';
 import _ from 'lodash'
 export default function ModalUser({ action, onHide, isshowModalUser, dataModalUser }) {
@@ -34,7 +34,6 @@ export default function ModalUser({ action, onHide, isshowModalUser, dataModalUs
     const [validInput, setValidInput] = useState(defaultValidInputs);
     useEffect(() => {
         setGroups(getGroups)
-
     }, []);
     useEffect(() => {
         if (action === 'EDIT') {
@@ -68,6 +67,7 @@ export default function ModalUser({ action, onHide, isshowModalUser, dataModalUs
 
     const checkValidate = () => {
         //create user
+        if (action === 'EDIT') return true
         setValidInput(defaultValidInputs)
         //check 
         let arr = ['email', 'phone', 'password', 'group']
@@ -97,27 +97,25 @@ export default function ModalUser({ action, onHide, isshowModalUser, dataModalUs
     const handleSave = async () => {
         let check = checkValidate()
         if (check) {
-            let res = await createNewUser({ ...userData, groupId: userData['group'] })
+            let res = action === 'CREATE' ?
+                await createNewUser({ ...userData, groupId: userData['group'] })
+                : await updateCurrentUser({ ...userData, groupId: userData['group'] })
+
             if (res.data && res.data.EC === 0) {
                 onHide()
-                setUserData({ ...defaultUserData, group: groups[0].id })
+                setUserData({
+                    ...defaultUserData,
+                    group: groups && groups.length > 0 ? groups[0].id : ''
+                })
                 toast.success("Success create new user")
-            } else {
-                if (res.data && +res.data.EC !== 0) {
-                    toast.error(res.data.EM)
-                    let _validInput = _.cloneDeep(defaultValidInputs)
-                    _validInput[res.data.DT] = false
-                    setValidInput(_validInput)
-                    if (res.data.DT === 'email') emailRef.current.focus()
-                    if (res.data.DT === 'phone') phoneRef.current.focus()
-                }
-                // if (res.data && res.data.EM === 'Email invalid') {
-                //     toast.error(res.data.EM)
-                //     let _validInput = _.cloneDeep(userData)
-                //     _validInput['email'] = false
-                //     setValidInput(_validInput)
-                //     emailRef.current.focus()
-                // }
+            }
+            if (res.data && +res.data.EC !== 0) {
+                toast.error(res.data.EM)
+                let _validInput = _.cloneDeep(defaultValidInputs)
+                _validInput[res.data.DT] = false
+                setValidInput(_validInput)
+                if (res.data.DT === 'email') emailRef.current.focus()
+                if (res.data.DT === 'phone') phoneRef.current.focus()
             }
         }
 

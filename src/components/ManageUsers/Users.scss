@@ -5,3 +5,25 @@
         }
     }
 }
+.manageUser_container {
+    .user_body {
+        td {
+            text-align: center;
+            align-content: center;
+            justify-content: center;
+        }
+        .user-update,
+        .user-delete {
+            font-size: 0px;
+            height: 32px;
+            width: 34px;
+            padding: 6px;
+        }
+    }
+    .btn:focus {
+        box-shadow: none;
+    }
+    .user-tableRow {
+        font-size: 1.2rem;
+    }
+}
