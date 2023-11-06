@@ -3,6 +3,8 @@ import axios from "axios";
 const instance = axios.create({
     baseURL: 'http://localhost:8081'
 });
+// config global to pass cookie with browser
+instance.defaults.withCredentials = true
 
 // Alter defaults after instance has been created
 //   instance.defaults.headers.common['Authorization'] = AUTH_TOKEN;
