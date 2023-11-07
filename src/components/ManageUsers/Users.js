@@ -6,8 +6,8 @@ import { toast } from 'react-toastify';
 import ModalDeleteConfirm from './ModalDeleteComfirm';
 import ModalUser from './ModalUser';
 
-
 export default function Users() {
+
     const [listUser, setListUser] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [currentLimit, setCurrentLimit] = useState(5);
