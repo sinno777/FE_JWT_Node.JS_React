@@ -45,12 +45,11 @@ const Login = (props) => {
                 token: access_token,
                 account: { getGroupWithRole, email, username }
             }
-            sessionStorage.setItem("account", JSON.stringify(data));
+            //userContext
             loginContext(data)
 
-            toast.success(response.EM)
+            //toast.success(response.EM)
             history.push("/users")
-            //window.location.reload()
         }
 
         if (response && +response.EC !== 0) {
@@ -66,14 +65,7 @@ const Login = (props) => {
         }
     }
 
-    useEffect(() => {
-        const session = sessionStorage.getItem("account");
-        if (session) {
-            history.push('/')
-            window.location.reload()
-        }
 
-    }, []);
     return (
         <div className="login-container py-5">
             <div className="container">

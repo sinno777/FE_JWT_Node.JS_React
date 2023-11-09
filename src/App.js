@@ -7,12 +7,7 @@ import { useEffect, useState } from 'react';
 import AppRoutes from './routes/AppRoutes';
 
 function App() {
-  const [account, setAccount] = useState({});
 
-  useEffect(() => {
-    const session = sessionStorage.getItem("account");
-    setAccount(JSON.parse(session));
-  }, []);
   return (
     <Router>
       <div className='nav-container'>
