@@ -45,6 +45,9 @@ const Login = (props) => {
                 token: access_token,
                 account: { getGroupWithRole, email, username }
             }
+
+            // bearer
+            localStorage.setItem("jwt", access_token);
             //userContext
             loginContext(data)
 
