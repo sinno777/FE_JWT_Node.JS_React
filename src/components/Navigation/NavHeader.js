@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import './NavHeader.scss'
-import { NavLink, useLocation } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import UserContext from "../Context/Context";
 import { Container, Nav, NavDropdown, Navbar } from 'react-bootstrap';
 
@@ -23,9 +23,8 @@ function NavHeader() {
         itemLink: '/about'
     }]
 
-    const { user } = useContext(UserContext);
+    const { user, logoutContext } = useContext(UserContext);
     const location = useLocation()
-
     if ((user && user.isAuthenticated) || location.pathname === '/') {
         return (
             <>
@@ -41,7 +40,9 @@ function NavHeader() {
                 <div className="navbar-container">
                     <Navbar expand="md" >
                         <Container>
-                            <Navbar.Brand href="#home" className='brandName'>Sinoo</Navbar.Brand>
+                            <Link className='brandName' to='/' >Sinoo</Link>
+                            {/* <Navbar.Brand href="#/" className='brandName'>Sinoo</Navbar.Brand> */}
+
                             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                             <Navbar.Collapse id="bg-body-tertiary">
                                 <Nav className="me-auto">
@@ -49,18 +50,20 @@ function NavHeader() {
                                     <NavLink to="/users" className="nav-link">Users</NavLink>
                                     <NavLink to="/projects" className="nav-link">Project</NavLink>
                                     <NavLink to="/about" className="nav-link">About</NavLink>
-                                    {/* {listPath.map((list, index) => {
-                                        return <NavLink id={list.id} onClick={() => handleActive(list.id)} className={`nav-link${active}`} to={`${list.itemLink}`} key={list.id}> <span>{list.item}</span></NavLink >
-                                    })} */}
-
                                 </Nav>
                                 <Nav>
-                                    <Nav.Item className='nav-link'> <span className='logout-username'>Hi Sinoo !</span></Nav.Item>
-                                    <NavDropdown title="Settings" id="collapsible-nav-dropdown">
-                                        <NavDropdown.Item href="#action/3.3">Change your password</NavDropdown.Item>
-                                        <NavDropdown.Divider />
-                                        <NavDropdown.Item href="#action/3.4">Logout</NavDropdown.Item>
-                                    </NavDropdown>
+                                    {user && user.isAuthenticated ?
+                                        <>
+                                            <Nav.Item className='nav-link'> <span className='logout-username'>Hi {user.account.username} !</span></Nav.Item>
+                                            <NavDropdown title="Settings" id="collapsible-nav-dropdown">
+                                                <NavDropdown.Item >Change your password</NavDropdown.Item>
+                                                <NavDropdown.Divider />
+                                                <NavDropdown.Item onClick={() => logoutContext()}>Logout</NavDropdown.Item>
+                                            </NavDropdown>
+                                        </> :
+                                        <Link className='nav-link' to='/login'><span>Login</span></Link>
+
+                                    }
                                 </Nav>
                             </Navbar.Collapse>
                         </Container>

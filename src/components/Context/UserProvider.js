@@ -1,9 +1,14 @@
 import { useEffect, useState } from "react";
 import UserContext from "./Context";
 import { getUserAccount } from '../../services/userService'
-import { useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
+import { logoutUser } from '../../services/userService'
+import { toast } from 'react-toastify';
+
 const UserProvider = ({ children }) => {
     const location = window.location.pathname
+    const history = useHistory();
+
     const userDefault = {
         isLoading: true,
         isAuthenticated: false,
@@ -16,11 +21,16 @@ const UserProvider = ({ children }) => {
         setUser({ ...userData, isLoading: false })
     };
 
-    const logout = () => {
-        setUser((user) => ({
-            name: '',
-            auth: false,
-        }));
+    const logoutContext = async () => {
+        let data = await logoutUser() // delete cookie from call aip
+        localStorage.removeItem('jwt') // delete jwt in localStorage
+        setUser({ ...userDefault, isLoading: false }) // clear user in context
+        if (data && +data.EC === 0) {
+            toast.success(data.EM)
+            history.push('/login')
+        } else {
+            toast.error(data.EM)
+        }
     };
 
     const fetchUser = async () => {
@@ -42,12 +52,15 @@ const UserProvider = ({ children }) => {
     }
 
     useEffect(() => {
-        if (location && (location.pathname !== '/' || location.pathname !== '/login')) {
+        if (location !== '/' && location !== '/login') {
             fetchUser()
+        } else {
+            setUser({ ...user, isLoading: false })
         }
     }, []);
 
-    return <UserContext.Provider value={{ user, loginContext, logout }}>
+
+    return <UserContext.Provider value={{ user, loginContext, logoutContext }}>
         {children}
     </UserContext.Provider>
 }
