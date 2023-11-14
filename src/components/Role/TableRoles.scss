@@ -1,0 +1,20 @@
+.tableRoles-container {
+    td {
+        font-size: 1.2rem;
+        // padding: 12px !important;
+    }
+    .role-tableRow {
+        .role-delete,
+        .role-update {
+            width: 32px;
+            height: 32px;
+            padding: 0px;
+            &:focus {
+                box-shadow: none;
+            }
+            i {
+                font-size: large;
+            }
+        }
+    }
+}

@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import './Roles.scss'
 import { v4 as uuidv4 } from 'uuid'
 import _ from 'lodash'
 import { toast } from 'react-toastify';
 import { createNewRoles } from '../../services/roleService'
+import TableRoles from './TableRoles'
 export default function Roles() {
+    const childRef = useRef();
     const childDefault = { url: '', description: '', isValidUrl: true }
     const [listChild, setListChild] = useState({
         child1: childDefault
@@ -40,6 +42,7 @@ export default function Roles() {
             let res = await createNewRoles(data)
             if (res && +res.EC === 0) {
                 toast.success(res.EM)
+                childRef.current.fetchListRoleAgain()
             } else {
                 toast.error(res.EM)
             }
@@ -66,7 +69,7 @@ export default function Roles() {
     return (
         <div className='role-container'>
             <div className="container">
-                <div className="mt-3">
+                <div className="add-roles mt-3">
                     <div className="title-role mt-3"><h2>Add new Roles:</h2></div>
                     <div className="role-parent">
                         {Object.entries(listChild).map(([key, child], i) => {
@@ -106,6 +109,11 @@ export default function Roles() {
                             <button className='btn btn-primary mt-3' onClick={() => handleSave()}>Save</button>
                         </div>
                     </div>
+                </div>
+                <hr />
+                <div className="list-role mt-3">
+                    <h3>List Current Role</h3>
+                    <TableRoles ref={childRef} />
                 </div>
             </div>
         </div>
