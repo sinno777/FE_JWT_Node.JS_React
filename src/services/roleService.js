@@ -9,6 +9,9 @@ const fetchAllRole = () => {
 const deleteRole = (role) => {
     return axios.delete(`/api/v1/role/delete`, { data: { id: role.id } })
 }
+const updateRole = (data) => {
+    return axios.put(`/api/v1/role/update`, { ...data })
+}
 export {
-    createNewRoles, deleteRole, fetchAllRole
+    createNewRoles, deleteRole, fetchAllRole, updateRole
 }
