@@ -1,0 +1,11 @@
+.group-role-container {
+    select,
+    input {
+        &:focus {
+            box-shadow: none;
+        }
+    }
+    .red {
+        color: red;
+    }
+}

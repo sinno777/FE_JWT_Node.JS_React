@@ -28,17 +28,11 @@ function NavHeader() {
     if ((user && user.isAuthenticated) || location.pathname === '/') {
         return (
             <>
-                {/* <div className="topnav">
-                    <NavLink to="/" exact>Home</NavLink>
-                    <NavLink to="/users">Users</NavLink>
-                    <NavLink to="/projects">Project</NavLink>
-                    <NavLink to="/about">About</NavLink>
-                </div> */}
                 {/* responsive-navbar-nav  */}
                 {/* className="bg-body-tertiary" */}
                 {/* basic-navbar-nav */}
                 <div className="navbar-container">
-                    <Navbar expand="md" >
+                    <Navbar expand="lg" >
                         <Container>
                             <Link className='brandName' to='/' >Sinoo</Link>
                             {/* <Navbar.Brand href="#/" className='brandName'>Sinoo</Navbar.Brand> */}
@@ -49,6 +43,7 @@ function NavHeader() {
                                     <NavLink to="/" exact className="nav-link">Home</NavLink>
                                     <NavLink to="/users" className="nav-link">Users</NavLink>
                                     <NavLink to="/roles" className="nav-link">Roles</NavLink>
+                                    <NavLink to="/group-role" className="nav-link">Group-Role</NavLink>
                                     <NavLink to="/projects" className="nav-link">Project</NavLink>
                                     <NavLink to="/about" className="nav-link">About</NavLink>
                                 </Nav>
