@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './GroupRole.scss'
 import { fetchGroups } from '../../services/userService';
 import { toast } from 'react-toastify';
-import { fetchAllRole, fetchRolesByGroup } from '../../services/roleService'
+import { fetchAllRole, fetchRolesByGroup, assignRolesToGroup } from '../../services/roleService'
 import _ from 'lodash'
 export default function GroupRole() {
     const [groups, setGroups] = useState([]);
@@ -68,6 +68,27 @@ export default function GroupRole() {
         }
         setAssignRolesByGroup(_assignRolesByGroup)
     }
+    const buildDataToSave = () => {
+        //format data: {groupId: 4, groupRoles: [{},{}]}
+        let result = {}
+        const _assignRolesByGroup = _.cloneDeep(assignRolesByGroup)
+        result.groupId = selectGroup
+        let groupRolesFilter = _assignRolesByGroup.filter(item => item.isAssigned === true)
+        let finalGroupRoles = groupRolesFilter.map(item => {
+            return { groupId: +selectGroup, roleId: +item.id }
+        })
+        result.groupRoles = finalGroupRoles
+        return result
+    }
+    const handleSave = async () => {
+        let data = buildDataToSave()
+        let res = await assignRolesToGroup(data)
+        if (res && res.EC === 0) {
+            toast.success(res.EM)
+        } else {
+            toast.error(res.EM)
+        }
+    }
     return (
         <div className='group-role-container'>
             <div className="container">
@@ -113,7 +134,8 @@ export default function GroupRole() {
                                         })}
                                 </div>
                                 <div className='mt-3'>
-                                    <button className='btn btn-warning'>Save</button>
+                                    <button className='btn btn-warning' onClick={() => handleSave()}
+                                    >Save</button>
                                 </div>
                             </>
                         }
