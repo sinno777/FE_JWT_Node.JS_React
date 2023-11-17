@@ -6,6 +6,8 @@ import Users from '../components/ManageUsers/Users'
 import PrivateRoutes from './PrivateRoutes'
 import Roles from '../components/Role/Roles'
 import GroupRole from '../components/GroupRole/GroupRole'
+import Home from '../components/Home/Home'
+import About from '../components/About/About'
 const Project = () => <span>Project</span>
 
 export default function AppRoutes() {
@@ -15,8 +17,6 @@ export default function AppRoutes() {
                 <PrivateRoutes path='/users' component={Users} />
                 <PrivateRoutes path='/roles' component={Roles} />
                 <PrivateRoutes path='/group-role' component={GroupRole} />
-                <PrivateRoutes path='/projects' component={Project} />
-
                 {/* right site */}
                 <Route path="/login">
                     <Login />
@@ -25,10 +25,10 @@ export default function AppRoutes() {
                     <Register />
                 </Route>
                 <Route path="/" exact>
-                    home
+                    <Home />
                 </Route>
                 <Route path="*">
-                    404 not find
+                    <About />
                 </Route>
             </Switch>
         </>

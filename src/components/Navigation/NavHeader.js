@@ -1,42 +1,37 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import './NavHeader.scss'
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import UserContext from "../Context/Context";
 import { Container, Nav, NavDropdown, Navbar } from 'react-bootstrap';
 
 function NavHeader() {
-    const listPath = [{
-        id: 1,
-        item: 'Home',
-        itemLink: '/'
-    }, {
-        id: 2,
-        item: 'User',
-        itemLink: '/users'
-    }, {
-        id: 3,
-        item: 'Project',
-        itemLink: '/projects'
-    }, {
-        id: 4,
-        item: 'About',
-        itemLink: '/about'
-    }]
-
+    // const listPath = [{
+    //     id: 1,
+    //     item: 'Home',
+    //     itemLink: '/'
+    // }, {
+    //     id: 2,
+    //     item: 'User',
+    //     itemLink: '/users'
+    // }, {
+    //     id: 3,
+    //     item: 'Project',
+    //     itemLink: '/projects'
+    // }, {
+    //     id: 4,
+    //     item: 'About',
+    //     itemLink: '/about'
+    // }]
     const { user, logoutContext } = useContext(UserContext);
     const location = useLocation()
-    if ((user && user.isAuthenticated) || location.pathname === '/') {
+
+    if ((user && user.isAuthenticated) || location.pathname === '/' || location.pathname === '/about') {
         return (
             <>
-                {/* responsive-navbar-nav  */}
-                {/* className="bg-body-tertiary" */}
-                {/* basic-navbar-nav */}
                 <div className="navbar-container">
                     <Navbar expand="lg" >
                         <Container>
                             <Link className='brandName' to='/' >Sinoo</Link>
-                            {/* <Navbar.Brand href="#/" className='brandName'>Sinoo</Navbar.Brand> */}
-
                             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                             <Navbar.Collapse id="bg-body-tertiary">
                                 <Nav className="me-auto">
@@ -44,7 +39,6 @@ function NavHeader() {
                                     <NavLink to="/users" className="nav-link">Users</NavLink>
                                     <NavLink to="/roles" className="nav-link">Roles</NavLink>
                                     <NavLink to="/group-role" className="nav-link">Group-Role</NavLink>
-                                    <NavLink to="/projects" className="nav-link">Project</NavLink>
                                     <NavLink to="/about" className="nav-link">About</NavLink>
                                 </Nav>
                                 <Nav>

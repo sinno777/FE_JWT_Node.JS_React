@@ -25,7 +25,13 @@ body {
 }
 
 .navbar-container {
-    background-color: #23272f;
+    // background-color: #23272f;
+    background-color: #132f4c;
+    box-shadow: inset 0px -1px 1px #132f4c;
+    .navbar {
+        padding-bottom: 0px;
+        padding-top: 0.2rem;
+    }
     .brandName {
         color: #04aa6d !important;
         font-weight: 700;
@@ -78,5 +84,13 @@ body {
         color: #00d1b2;
         font-size: 1.2rem;
         font-weight: 600;
+    }
+    .navbar-collapse {
+        .navbar-nav {
+            .nav-link.active {
+                border-bottom: 4px solid #04aa6d;
+                border-radius: 2px;
+            }
+        }
     }
 }

@@ -30,8 +30,10 @@ instance.interceptors.response.use(function (response) {
     switch (status) {
         // authentication (token related issues)
         case 401: {
-            toast.error('Unauthorized the user. Please login...')
-            // custom to access react get response, isn't break app
+            const location = window.location.pathname
+            if (location !== '/' && location !== '/login' && location !== '/register' && location !== '/about') {
+                toast.error('Unauthorized the user. Please login...')
+            }
             return error.response.data;
         }
 

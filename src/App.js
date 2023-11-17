@@ -7,13 +7,27 @@ import { useContext, useEffect, useState } from 'react';
 import AppRoutes from './routes/AppRoutes';
 import { Circles } from 'react-loader-spinner'
 import UserContext from "./components/Context/Context";
-
+import { Scrollbars } from 'react-custom-scrollbars';
 function App() {
   const { user } = useContext(UserContext);
+  const [currentHeight, setCurrentHeight] = useState(0);
+  window.addEventListener('resize', widthResizer)
 
+  useEffect(() => {
+    widthResizer()
+  }, [user]);
+
+  function widthResizer() {
+    var height = window.innerHeight
+    setCurrentHeight(height)
+  }
 
   return (
-    <>
+    <Scrollbars
+      autoHide
+      style={{ height: currentHeight }}
+
+    >
       <Router>
         {user && user.isLoading ?
           <div className="loading-container">
@@ -41,7 +55,7 @@ function App() {
       </Router>
       <ToastContainer
         position="top-right"
-        autoClose={5000}
+        autoClose={2000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
@@ -51,7 +65,7 @@ function App() {
         pauseOnHover
         theme="colored"
       />
-    </>
+    </Scrollbars>
   );
 }
 

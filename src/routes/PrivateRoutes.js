@@ -1,6 +1,5 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 import { Redirect, Route } from 'react-router-dom'
-import { useHistory } from 'react-router-dom'
 import Context from '../components/Context/Context'
 
 export default function PrivateRoutes(props) {

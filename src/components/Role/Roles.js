@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import './Roles.scss'
 import { v4 as uuidv4 } from 'uuid'
 import _ from 'lodash'
@@ -11,7 +11,6 @@ export default function Roles() {
     const [listChild, setListChild] = useState({
         child1: childDefault
     });
-
 
     const handleOnchangeInput = (name, value, key) => {
         let _listChild = _.cloneDeep(listChild)
@@ -90,7 +89,6 @@ export default function Roles() {
                                                 className='form-control'
                                                 value={child.description}
                                                 onChange={(e) => handleOnchangeInput('description', e.target.value, key)}
-
                                             />
                                         </div>
                                         <div className="col-2 action mt-4 py-1">
@@ -101,7 +99,6 @@ export default function Roles() {
                                             {i >= 1 && <i className="fa fa-trash-o text-danger fs-2"
                                                 onClick={() => handleDelete(key)}
                                             ></i>}
-
                                         </div>
                                     </div>
                                 )

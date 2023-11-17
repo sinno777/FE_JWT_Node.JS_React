@@ -1,0 +1,103 @@
+.homePage-container {
+    height: 100vh;
+    .carousel-indicators {
+        top: 0;
+        margin-top: 1rem;
+    }
+    .carousel-control-prev,
+    .carousel-control-next {
+        display: none;
+    }
+    .carousel-caption {
+        bottom: 56%;
+    }
+    //HomePage
+    .introduceSN {
+        // background: url("../../image/nasa.jpg") fixed no-repeat center/100%;
+        background-image: url("../../image/nasa.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        height: 100%;
+        position: relative;
+        color: rgb(213, 235, 161);
+        .introduceSN_content {
+            position: absolute;
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-weight: 600;
+            h1 {
+                color: #04aa6d;
+                font-weight: 700;
+            }
+            .underline {
+                color: #04aa6d;
+            }
+            .control {
+                .btn_signUp {
+                    background-color: transparent;
+                    padding: 0.4rem 1.9rem;
+                    color: aliceblue;
+                    box-shadow: none;
+                    background: #14f8a5;
+                    border: 0;
+                    border-radius: 8px;
+                    transition: all 0.2s linear;
+                    &:hover {
+                        background: #04aa6d;
+                    }
+                }
+            }
+        }
+    }
+    .contentSN {
+        background-color: rgb(243, 236, 227);
+
+        padding-top: 2rem;
+        .contentSN_header {
+            h1 {
+                font-weight: 700;
+                color: #04aa6d;
+            }
+            p {
+                font-size: larger;
+                font-weight: 200;
+            }
+        }
+        .contentSN_body {
+            .react,
+            .nodejs,
+            .database {
+                background-color: bisque;
+                text-align: center;
+                min-height: 284px;
+                border-radius: 10px;
+                box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+                cursor: pointer;
+                &:hover {
+                    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+                }
+                .contentItem {
+                    p {
+                        text-align: start;
+                        i {
+                            margin-right: 5px;
+                            color: chocolate;
+                            cursor: pointer;
+                            &:hover {
+                                color: rgb(177, 210, 30);
+                            }
+                        }
+                    }
+                }
+            }
+            .database {
+                img {
+                    width: 6rem;
+                    padding: 5px 0;
+                }
+            }
+        }
+    }
+}

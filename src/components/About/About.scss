@@ -1,0 +1,34 @@
+.about-container {
+    background-color: #001e3c;
+    min-height: 100vh;
+    padding-top: 3rem;
+    .avatar {
+        img {
+            width: 95%;
+            border-radius: 50%;
+            box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        }
+        .link-item {
+            border-radius: 50%;
+            border: 1px solid #b2c0cf;
+            height: 40px;
+            width: 40px;
+            text-align: center;
+            font-size: 1.5rem;
+            a {
+                color: #dea500;
+            }
+        }
+    }
+    .content-right {
+        p:first-of-type {
+            color: #707070;
+        }
+        .link-cv {
+            cursor: pointer;
+            &:hover {
+                color: aquamarine !important;
+            }
+        }
+    }
+}

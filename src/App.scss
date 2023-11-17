@@ -10,3 +10,20 @@
         margin-top: 8px;
     }
 }
+.return {
+    margin: 10px 0;
+    cursor: pointer;
+    a {
+        text-decoration: none;
+        font-size: 1.2rem;
+        color: #75a2db;
+        font-weight: 700;
+        transition: 0.2s linear;
+        i {
+            margin-right: 10px;
+        }
+        &:hover {
+            color: #1877f2;
+        }
+    }
+}

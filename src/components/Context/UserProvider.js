@@ -6,7 +6,6 @@ import { logoutUser } from '../../services/userService'
 import { toast } from 'react-toastify';
 
 const UserProvider = ({ children }) => {
-    const location = window.location.pathname
     const history = useHistory();
 
     const userDefault = {
@@ -52,11 +51,12 @@ const UserProvider = ({ children }) => {
     }
 
     useEffect(() => {
-        if (location !== '/' && location !== '/login') {
-            fetchUser()
-        } else {
-            setUser({ ...user, isLoading: false })
-        }
+        // if (location !== '/' && location !== '/login') {
+        //     fetchUser()
+        // } else {
+        //     setUser({ ...user, isLoading: false })
+        // }
+        fetchUser()
     }, []);
 
 
