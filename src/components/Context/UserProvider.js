@@ -26,7 +26,8 @@ const UserProvider = ({ children }) => {
         setUser({ ...userDefault, isLoading: false }) // clear user in context
         if (data && +data.EC === 0) {
             toast.success(data.EM)
-            history.push('/login')
+            // history.push('/login')
+            // window.location.reload()
         } else {
             toast.error(data.EM)
         }

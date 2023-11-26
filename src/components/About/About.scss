@@ -4,7 +4,8 @@
     padding-top: 3rem;
     .avatar {
         img {
-            width: 95%;
+            padding: 0.5rem;
+            width: 100%;
             border-radius: 50%;
             box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
         }
@@ -15,8 +16,25 @@
             width: 40px;
             text-align: center;
             font-size: 1.5rem;
+            cursor: pointer;
             a {
+                transition: 0.2s;
                 color: #dea500;
+            }
+            &:nth-of-type(1):hover {
+                a {
+                    color: #316ff6;
+                }
+            }
+            &:nth-of-type(2):hover {
+                a {
+                    color: #f34f29;
+                }
+            }
+            &:nth-of-type(3):hover {
+                a {
+                    color: whitesmoke;
+                }
             }
         }
     }

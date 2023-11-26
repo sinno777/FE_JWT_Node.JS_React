@@ -1,11 +1,14 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import _ from 'lodash'
 import { updateRole } from '../../services/roleService'
 import { toast } from 'react-toastify';
+import UserContext from "../Context/Context";
+
 export default function ModalRole({ isShowModalUpdate, handleClose, dataModalUpdate, listRole }) {
     const urlRef = useRef()
+    const { user } = useContext(UserContext);
 
     const defaultRoleData = {
         url: '', description: ''
@@ -48,7 +51,10 @@ export default function ModalRole({ isShowModalUpdate, handleClose, dataModalUpd
     const handleSave = () => {
         let check = checkValidate()
         if (check) {
-            toast.success('Update role success!')
+            if (user && user.isAuthenticated) {
+                toast.success('Update role success!')
+            }
+            console.log(user)
             updateRole({ ...roleData })
             setRoleData(defaultRoleData)
             handleClose()

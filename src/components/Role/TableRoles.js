@@ -3,6 +3,7 @@ import { deleteRole, fetchAllRole } from '../../services/roleService'
 import { toast } from 'react-toastify';
 import './TableRoles.scss'
 import ModalRole from './ModalRole';
+
 const TableRoles = (props, ref) => {
     const [listRole, setListRole] = useState([]);
     const [isShowModalUpdate, setIsShowModalUpdate] = useState(false);

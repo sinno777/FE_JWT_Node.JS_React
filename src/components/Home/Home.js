@@ -13,8 +13,8 @@ export default function Home() {
                 <div className="introduceSN_content">
                     <h1>FullStack Project</h1>
                     <p><span>Sinoo</span> help you connect and share with the people in your life</p>
-                    <p>Demo account: <span className='underline'>sinoo@admin.com</span> - Pass: <span className='underline'>123456</span></p>
-                    {!user && !user.isAuthenticated &&
+                    <p>Demo account: <span className='underline'>sinoo@demo.com</span> - Pass: <span className='underline'>123456</span></p>
+                    {(!user || !user.isAuthenticated) &&
                         <div className="control ">
                             <Link className='btn_signUp text-decoration-none' to='/login'>Sign In</Link>
                         </div>
@@ -29,47 +29,47 @@ export default function Home() {
                 <div className="contentSN_body ">
                     <div className="container">
                         <div className="row px-4 px-md-0">
-                            <div className="p-2 col-12 col-sm-4">
+                            <div className="p-2 col-12 col-md-4">
                                 <div className="nodejs">
-                                    <img src={nodejs} alt="" />
+                                    <img src={nodejs} alt="nodejs" />
                                     <div className="contentItem p-4">
-                                        <p><i class="fa fa-check-square-o" aria-hidden="true"></i>
+                                        <p><i className="fa fa-check-square-o" aria-hidden="true"></i>
                                             Apply JWT: Json web token</p>
-                                        <p><i class="fa fa-check-square-o" aria-hidden="true"></i>
+                                        <p><i className="fa fa-check-square-o" aria-hidden="true"></i>
                                             Middleware: Check user login, User's role, ,etc...</p>
-                                        <p><i class="fa fa-check-square-o" aria-hidden="true"></i>
+                                        <p><i className="fa fa-check-square-o" aria-hidden="true"></i>
                                             Apply Cookies and Bearer Token Header: To Identify user</p>
                                     </div>
                                 </div>
                             </div>
-                            <div className="p-2 col-12 col-sm-4">
+                            <div className="p-2 col-12 col-md-4">
                                 <div className="react">
-                                    <img src={reactjs} alt="" />
+                                    <img src={reactjs} alt="reactJs" />
                                     <div className="contentItem p-4">
-                                        <p><i class="fa fa-check-square-o" aria-hidden="true"></i>
+                                        <p><i className="fa fa-check-square-o" aria-hidden="true"></i>
                                             Pagination: Divide to page</p>
-                                        <p><i class="fa fa-check-square-o" aria-hidden="true"></i>
+                                        <p><i className="fa fa-check-square-o" aria-hidden="true"></i>
                                             Clone Element: Adding multi role at the same time</p>
-                                        <p><i class="fa fa-check-square-o" aria-hidden="true"></i>
+                                        <p><i className="fa fa-check-square-o" aria-hidden="true"></i>
                                             Use Ref: Pass from Parent down Child function</p>
-                                        <p><i class="fa fa-check-square-o" aria-hidden="true"></i>
+                                        <p><i className="fa fa-check-square-o" aria-hidden="true"></i>
                                             React Context API: Replace Redux</p>
-                                        <p><i class="fa fa-check-square-o" aria-hidden="true"></i>
+                                        <p><i className="fa fa-check-square-o" aria-hidden="true"></i>
                                             Customize Axios: Optimize call RESTful APIs</p>
-                                        <p><i class="fa fa-check-square-o" aria-hidden="true"></i>
+                                        <p><i className="fa fa-check-square-o" aria-hidden="true"></i>
                                             Collaborate React and Bootstrap 5: Create Responsive UI </p>
                                     </div>
                                 </div>
                             </div>
-                            <div className="p-2 col-12 col-sm-4">
+                            <div className="p-2 col-12 col-md-4">
                                 <div className="database">
-                                    <img src={sql} alt="" />
+                                    <img src={sql} alt="Sql" />
                                     <div className="contentItem p-4">
-                                        <p><i class="fa fa-check-square-o" aria-hidden="true"></i>
+                                        <p><i className="fa fa-check-square-o" aria-hidden="true"></i>
                                             How to Analysis and Design </p>
-                                        <p><i class="fa fa-check-square-o" aria-hidden="true"></i>
+                                        <p><i className="fa fa-check-square-o" aria-hidden="true"></i>
                                             Decentralize user</p>
-                                        <p><i class="fa fa-check-square-o" aria-hidden="true"></i>
+                                        <p><i className="fa fa-check-square-o" aria-hidden="true"></i>
                                             Use XAMPP: A free and open-source cross-platform web server solution stack package developed</p>
                                     </div>
                                 </div>

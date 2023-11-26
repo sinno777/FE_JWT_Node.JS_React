@@ -51,6 +51,7 @@ export default function Users() {
             setIsshowModal(false)
         } else {
             toast.error(response.EM)
+            setIsshowModal(false)
         }
     }
     const onHideModalUser = async () => {

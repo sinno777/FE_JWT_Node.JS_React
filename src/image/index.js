@@ -6,7 +6,7 @@ import reactjs from './reactjs.svg'
 import nodejs from './nodejs.svg'
 import sql from './sql.png'
 import avtSuit from './avtSuit.jpg'
-
+import AnhKhoa from './AnhKhoa.pdf'
 export {
-    martin, nasa, guillermo, marius, reactjs, nodejs, sql, avtSuit
+    martin, nasa, guillermo, marius, reactjs, nodejs, sql, avtSuit, AnhKhoa
 }

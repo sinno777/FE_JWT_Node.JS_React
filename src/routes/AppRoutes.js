@@ -8,7 +8,6 @@ import Roles from '../components/Role/Roles'
 import GroupRole from '../components/GroupRole/GroupRole'
 import Home from '../components/Home/Home'
 import About from '../components/About/About'
-const Project = () => <span>Project</span>
 
 export default function AppRoutes() {
     return (
